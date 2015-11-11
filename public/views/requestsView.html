@@ -1,0 +1,43 @@
+<md-content  class="md-padding">
+		<md-toolbar class="md-padding" flex-offset-gt-md="25" flex-sm="100" flex-gt-md="50" >
+		    <h3>Delivery Requests </h3>
+		</md-toolbar>
+	    <md-card class="md-padding bouncy-scale-in md-whiteframe-z5"  flex-offset-gt-md="25" flex-gt-md="50"  ng-repeat="request in allRequests" >
+			<div layout="row">
+	        	<div layout-align-sm="center center" layout="row">
+	        		<h2 >{{request.firstName + " " + request.lastName}}</h2>
+	        	</div>
+	        	<span flex></span>
+	        	<md-button ng-click="deleteRequest(request)" class="md-icon-button md-primary" aria-label="Delete Request">
+	        	  <md-icon ><i class="material-icons">close</i></md-icon>
+	        	</md-button>
+			</div>
+
+	      <md-content layout="row" layout-sm="column">
+	      	<md-content >
+	      		<img ng-src="{{ ::request.pictureMd}}"  alt="user Img" >
+	      	</md-content>
+
+
+	     	<md-content flex layout="column" class="md-padding" layout-align-gt-sm="center center"	>
+		     	<div flex layout-gt-sm="row">
+		     		<label for="">Phone : &nbsp;</label><p flex>{{request.cell}}</p>
+		     	</div>
+		     	<div flex layout-gt-sm="row">
+		     		<label for="">Email : &nbsp;</label><p flex>{{request.email}}</p>
+		     	</div>
+		     	<div flex layout-gt-sm="row"><label for="">Time : &nbsp;</label><p flex>{{request.timeStamp| date:"MM/dd/yyyy 'at' h:mma"}}</p> </div>
+	     	</md-content>
+
+
+	      </md-content>
+
+	        	<h4 class="md-padding"> {{ request.what}} </h4>
+
+	      <div class="md-actions" layout="row" layout-align="end center">
+	        <md-button data-ng-click="goToProfile(user)">View Profile</md-button>
+            <md-button data-ng-click="setMapCenter(user)">View On Map</md-button>
+	      </div>
+
+	    </md-card>
+</md-content>

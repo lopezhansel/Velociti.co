@@ -1,0 +1,27 @@
+<md-content layout-padding layout="row" id="accountSettings" layout-align="center start">
+
+<md-content  layout="column"  flex="80" >
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools ">
+        <h1>{{user.firstName + " "+ user.lastName  | uppercase}}</h1>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding layout="row" layout-align-md="center center" layout-align-gt-md="start start">
+        <img class="profilePic" ng-src={{user.pictureMd}} flex-sm >
+
+    </md-content>
+    <md-content layout-padding>
+
+
+        <h2>User Name: {{user.username.capitalize() }}</h2>
+        <h3>Email: {{user.email}}</h3>
+        <h3>Phone: {{user.phone}}</h3>
+        <h3>Cell: {{user.cell}}</h3>
+        <h3>Gender: {{user.gender.capitalize()}}</h3>
+
+        <h2>{{user.dob|date}}</h2>
+        <h4 ng-if="user.apart">Distance: {{user.apart}}</h4>
+
+    </md-content>
+</md-content>
+</md-content>

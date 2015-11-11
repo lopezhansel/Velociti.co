@@ -1,0 +1,54 @@
+
+ <md-dialog aria-label="Sumimit Request" >
+  <!-- <form> -->
+    <md-toolbar class="md-toolbar-tools md-accent">
+
+        <h1><strong>Submit A New Request</strong></h1>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close dialog" >
+          
+        </md-button>
+
+    </md-toolbar>
+
+    <md-dialog-content  layout-padding style="max-width:800px;max-height:810px; ">
+
+    
+
+
+      <h1> {{::me.firstName.capitalizeFirstLetter()}} Ask a biker to get you something</h1>
+
+      <form layout="column">
+
+        <div layout="row">
+          <md-input-container flex> 
+            <label>What</label> 
+            <input ng-model="me.what" type="text"/> 
+          </md-input-container>
+        </div>
+        <div layout="row">
+          <md-input-container flex> 
+            <label>Email</label> 
+            <input  ng-model="me.email" type="text"/> 
+          </md-input-container>
+
+          <md-input-container flex> 
+            <label>Cell</label> 
+            <input ng-model="me.cell" type="text"/> 
+          </md-input-container>
+        </div>
+        
+        
+          <md-button  class="md-accent md-raised login" ng-click="emitNewRequest()" >
+            <strong>Submit</strong>
+          </md-button>
+
+      </form>
+
+
+      
+    </md-dialog-content>
+
+  <!-- </form> -->
+</md-dialog>
+
