@@ -1,12 +1,4 @@
-# Velocetti 
-
-# This project Has Moved
-This project has moved into its on Repo at [github.com/lopezhansel/Velociti.co](https://github.com/lopezhansel/Velociti.co)
-
-This was initially my final Project at RefactorU. I will continue to work on this on my spare time
-
-This project was renamed from Velocetti to velociti it now has it's own domain at [velociti.co](https://velociti.co)
-
+# Velociti
 
 ## MOBILE FIRST DESIGN
 * with RESPONSIVE DESIGN 
