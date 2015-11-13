@@ -50,7 +50,7 @@ My first full project applying all I have learned to best of my abilities. This 
 - [ ] Work on sidebar 
 - [ ] Add Icon for coffee request
 - [ ] Ng-class and animations on ng-view
-- [ ] Fix LoginView in phone screen 
+- [x] Fix LoginView in phone screen 
 - [x] Redo Request View smaller 
 - [x] Notification for  new Request
 
