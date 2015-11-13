@@ -36,8 +36,14 @@
             </md-button>
             <img ng-click="setMapCenter()" class="logo" src="http://gdurl.com/0P2s">
             <span flex></span>
-            <md-button class="md-raised "  ng-click="showLoginDialog($event)" aria-label="Login"  md-ripple-size="full" ng-if="me.name !== 'There'"><strong>Logout</strong></md-button>
-            <md-button class="md-raised " href="/logout" aria-label="LogOut"  md-ripple-size="full" ng-if="me.name !== 'There'"><strong>Logout</strong></md-button>
+
+            <md-button class="md-raised md-accent "  ng-click="showLoginDialog($event)" aria-label="Login"  md-ripple-size="full" ng-if="me.name !== 'There'">
+                <strong>Login</strong>
+            </md-button>
+
+            <md-button class="md-raised md-accent" href="/logout" aria-label="LogOut"  md-ripple-size="full" ng-if="me !== 'there'">
+                <strong>Logout</strong>
+            </md-button>
            
           </div>
         </md-toolbar>

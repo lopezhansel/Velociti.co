@@ -37,26 +37,7 @@ app.controller('mainController', ['$scope', 'mainService', '$routeParams', '$mdM
 
 
   $scope.status = '  ';
-  $scope.showLoginDialog = function(ev, index) {
-    $scope.popUpDialogUser = index;
-    $mdDialog.show({
-        locals: {
-          currentUserPopUP: $scope.popUpDialogUser
-        },
-        controller: loginDialogController,
-        templateUrl: '/views/loginDialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
-
-  };
-
+ 
 
   $scope.$watch(function() {
     return $mdMedia('sm');

@@ -1,5 +1,24 @@
 app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", "$timeout",
 	function($scope, $mdSidenav, mainService, $routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location, $timeout) {
+		$scope.showLoginDialog = function(ev, index) {
+		  $scope.popUpDialogUser = index;
+		  $mdDialog.show({
+		      locals: {
+		        currentUserPopUP: $scope.popUpDialogUser
+		      },
+		      controller: loginDialogController,
+		      templateUrl: '/views/loginDialog.html',
+		      parent: angular.element(document.body),
+		      targetEvent: ev,
+		      clickOutsideToClose: true
+		    })
+		    .then(function(answer) {
+		      $scope.status = 'You said the information was "' + answer + '".';
+		    }, function() {
+		      $scope.status = 'You cancelled the dialog.';
+		    });
+
+		};
 
 		$scope.redirect = function(urlStr) {
 			$location.path(urlStr);
