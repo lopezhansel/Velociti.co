@@ -13,7 +13,6 @@ function greatCircleMethod(latitude, longitude) {
   var c = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
   var distance = (earthMedianRadius * c);
   return distance;
-
 }
 
 function userLocToMarkers(inputUsers) {

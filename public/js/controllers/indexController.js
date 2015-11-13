@@ -59,6 +59,11 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 		};
 
 
+		$scope.$watch(function() {
+		  return $mdMedia('sm');
+		}, function(sizeBool) {
+		  $scope.sm = sizeBool;
+		});
 	}
 ]);
 

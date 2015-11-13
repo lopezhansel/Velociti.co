@@ -283,3 +283,6 @@ md-card.ng-enter{
 md-card.ng-leave{
   animation: zoomOutDown 1s;
 }
+p.sm-screen {
+    font-size: 28px;
+}

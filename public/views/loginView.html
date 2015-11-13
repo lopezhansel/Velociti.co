@@ -1,4 +1,4 @@
-<md-content class="md-padding" ng-if="!users" layout="column " layout-align="center center">
+<md-content class="md-padding" ng-if="!sm" layout="column " layout-align="center center">
   <h1 class="md-display-3">Welcome to Velocetti!</h1>
   <h1 class="md-display-1"> A  Bike Delivery App </h1>
   <h1 class="md-display-1">"Velo" means BIKE in French </h1>
@@ -8,6 +8,19 @@
     <p class="md-display-1 login-btn">Log In Here</p>
   </md-button>
 </md-content>
+
+
+<md-content class="sm-screen md-padding" ng-if="sm" layout="column " layout-align="center center">
+  <!-- <p class="md-display-1">Welcome to Velocetti!</h6> -->
+  <p class="sm-screen"> A  Bike Delivery App </p>
+  <p class="sm-screen">Velo = BIKE in French </p>
+  <p class="sm-screen"> Velo + City -> <strong>Velocetti</strong></p>
+  <p class="sm-screen"> Get <strong>Paid</strong> to Bike</strong></p>
+  <md-button ng-click="showLoginDialog($event)" class="md-primary md-raised ">
+    <p class="sm-screen login-btn">Log In Here</p>
+  </md-button>
+</md-content>
+
 
 <md-content class="md-padding" ng-if="users" layout="column " layout-align="center center">
   <h1 class="md-display-3" >You are already Logged in</h1>
