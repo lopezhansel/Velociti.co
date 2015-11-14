@@ -76,6 +76,25 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 
 
 		};
+		$scope.loginAsGuest = function() {
+		  $scope.guest = {
+		    username : "smallmouse892",
+		    password : "tunafish"
+		  };
+		  $http({
+		    method: 'POST',
+		    url: '/login',
+		    data: $scope.guest
+		  }).then(function(returnData) {
+		    console.log(returnData);
+		    if (returnData.data) {
+		      window.location.href = "/";
+		    } else {
+		      console.log(returnData);
+		    }
+		  } );
+		  $mdDialog.hide();
+		};
 
 
 		$scope.$watch(function() {
