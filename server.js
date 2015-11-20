@@ -13,7 +13,7 @@ module.exports = app;
 require("./config/myPassport");
 
 
-var port = 80;
+var port = 3000;
 app.server = app.listen(port, function() {
     console.log('Velociti Started', Date.now());
 });
@@ -149,8 +149,7 @@ socketServer.use(function(socket, next) {
 function isEven(n) {
     return n % 2 === 0;
 }
-// #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00
-// #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00
+
 
 
 socketServer.on("connection", function(socket) {
@@ -242,6 +241,3 @@ socketServer.on("connection", function(socket) {
 }); ////socketServer.on("connection",
 
 
-
-// #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00
-// #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00  #FFFF00
