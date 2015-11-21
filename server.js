@@ -21,7 +21,6 @@ app.server = app.listen(port, function() {
 var io = require("socket.io");
 var socketServer = io(app.server);
 var loggedInUsers = {
-
     "563037f8369f0ff01e75fe8a": {
         "_id": "563037f8369f0ff01e75fe8a",
         "username": "crazyfrog828",
@@ -40,9 +39,6 @@ var loggedInUsers = {
         "pictureSm": "https://randomuser.me/api/portraits/thumb/women/91.jpg",
         "__v": 0
     },
-
-
-
     "563037f6369f0ff01e75fe80": {
         "_id": "563037f6369f0ff01e75fe80",
         "username": "tinygorilla394",
@@ -79,7 +75,6 @@ var loggedInUsers = {
         "pictureSm": "https://randomuser.me/api/portraits/thumb/women/4.jpg",
         "__v": 0
     },
-
     "563037f8369f0ff01e75fe8b": {
         "_id": "563037f8369f0ff01e75fe8b",
         "username": "bigleopard416",
@@ -98,7 +93,6 @@ var loggedInUsers = {
         "pictureSm": "https://randomuser.me/api/portraits/thumb/men/70.jpg",
         "__v": 0
     },
-
     "563037f9369f0ff01e75fe90": {
         "_id": "563037f9369f0ff01e75fe90",
         "username": "heavymeercat968",
@@ -117,13 +111,11 @@ var loggedInUsers = {
         "pictureSm": "https://randomuser.me/api/portraits/thumb/men/62.jpg",
         "__v": 0
     },
-
     "563037f7369f0ff01e75fe83": {
         "_id": "563037f7369f0ff01e75fe83",
         "username": "lazyfish598",
         "password": "$2a$10$2xgiTfscEGqoa1Btf2i/Fu0ax/bzp9S2xKdJQNV6n0OXTPiVw1GsC",
         "gender": "male",
-
         "firstName": "charlie",
         "lastName": "jensen",
         "email": "charlie.jensen@example.com",
@@ -136,9 +128,6 @@ var loggedInUsers = {
         "pictureSm": "https://randomuser.me/api/portraits/thumb/men/23.jpg",
         "__v": 0
     }
-
-
-
 };
 var allRequests = {};
 
@@ -156,24 +145,6 @@ socketServer.on("connection", function(socket) {
     console.log("NEW SOCKET CONNECTION Adress: ", socket.handshake.address);
     var apiMe = "there";
     socket.emit('apiMe', apiMe);
-    // var apiMe = {
-    //     "_id": undefined,
-    //     "username": undefined,
-    //     "password": undefined,
-    //     "gender": undefined,
-    //     "firstName": undefined,
-    //     "lastName": undefined,
-    //     "email": undefined,
-    //     "phone": undefined,
-    //     "cell": undefined,
-    //     "lat": undefined,
-    //     "lon": undefined,
-    //     "pictureLg": undefined,
-    //     "pictureMd": undefined,
-    //     "pictureSm": undefined,
-    //     "__v": undefined,
-    // };
-
     if (socket.request.session && socket.request.session.passport && socket.request.session.passport.user) {
 
         apiMe = socket.request.session.passport.user;
@@ -195,49 +166,38 @@ socketServer.on("connection", function(socket) {
             newRequest.timeStamp = incoming.timeStamp;
             newRequest.pictureMd = incoming.pictureMd;
             allRequests[incoming.timeStamp] = newRequest;
-            // console.log(allRequests);
             socketServer.emit('allRequests', allRequests);
-            // socketServer.emit('allU')
-        }); ////socket.on("newRequest",
+        });
         socket.emit('allRequests', allRequests);
-        
+
         socket.on('deleteRequest', function(request) {
-            // if  (apiMe._id === request._id) {} // So Users  can only delete their own Request
-            delete allRequests[request.timeStamp] ;
+            delete allRequests[request.timeStamp];
             socketServer.emit('allRequests', allRequests);
-        }); //////socket.on('disconnect'
+        });
 
         User.findById(apiMe, function(error, userDoc) {
             console.log(userDoc);
             userDoc.password = null;
             loggedInUsers[apiMe] = userDoc;
-
             socket.emit('apiMe', userDoc);
             socketServer.emit('allUsers', loggedInUsers);
-        }); //// User.findById(apiMe
+        });
 
 
         socket.on("myLocation", function(userLocation) {
-            // console.log(userLocation);
             if (apiMe) {
                 loggedInUsers[apiMe].lat = userLocation.lat;
                 loggedInUsers[apiMe].lon = userLocation.lon;
                 loggedInUsers[apiMe].timeStamp = userLocation.timeStamp;
             }
-            // console.log(loggedInUsers);
             socketServer.emit('allUsers', loggedInUsers);
-            // socketServer.emit('allUsers',loggedInUsers);
-        }); ////socket.on("myLocation",
-        
-
+        });
         socket.on('disconnect', function() {
             console.log('user disconnected');
             delete loggedInUsers[apiMe];
             socketServer.emit('allUsers', loggedInUsers);
-        }); //////socket.on('disconnect'
+        });
 
 
-    } ////if (socket.request.session &&
-}); ////socketServer.on("connection",
-
-
+    }
+});
