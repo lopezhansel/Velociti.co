@@ -9,11 +9,7 @@ app.controller('mapController', ['$scope', 'mainService', '$routeParams', '$mdMe
 		}
 	}
 
-	$scope.mapCenter = {
-		lat: 40.0164106,
-		lng: -105.2201631,
-		zoom: 12
-	};
+	$scope.mapCenter = mainService.getMapCenter();
 
 	$timeout(function() {
 		if (mainService.location) {
