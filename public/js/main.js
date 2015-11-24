@@ -1,19 +1,4 @@
-var clientLat = 0;
-var clientLng = 0;
 
-function greatCircleMethod(latitude, longitude) {
-  var earthMedianRadius = (6371 / 1.609344); //Convert Kilometers to Miles 
-  var φ1 = clientLat.toRad();
-  var φ2 = latitude.toRad();
-  var Δφ = (latitude - clientLat).toRad();
-  var Δλ = (longitude - clientLng).toRad();
-  var arc = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) *
-    Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  var c = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
-  var distance = (earthMedianRadius * c);
-  return distance;
-}
 
 function userLocToMarkers(inputUsers) {
   var markersArray = [];

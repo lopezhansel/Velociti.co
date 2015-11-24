@@ -20,13 +20,16 @@ app.controller('mainController', ['$scope', 'mainService', '$routeParams', '$mdM
 
   $scope.showMap = false;
   $scope.selectedUser = {};
+
   $scope.setMapCenter = function(user) {
     $scope.selectedUser = user;
+
     mainService.location = {
         lat: user.lat,
         lng: user.lon,
         zoom: 17,
       };
+      
     console.log($scope.selectedUser);
     $scope.selectedIndex = 1;
     $location.path('/map');

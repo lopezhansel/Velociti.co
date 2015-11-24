@@ -1,5 +1,9 @@
 app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", "$timeout",
 	function($scope, $mdSidenav, mainService, $routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location, $timeout) {
+
+
+		$scope.mainService = mainService;
+
 		$scope.showLoginDialog = function(ev, index) {
 		  $scope.popUpDialogUser = index;
 		  $mdDialog.show({
@@ -23,6 +27,7 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 		$scope.redirect = function(urlStr) {
 			$location.path(urlStr);
 		};
+
 		$scope.ngViewToggle = function(urlStr) {
 			if ($location.$$path === '/map')       {$scope.selectedIndex = 1; }
 			if ($location.$$path === '/profile')   {$scope.selectedIndex = 2; }
@@ -125,8 +130,8 @@ function requestController($scope, $mdDialog, $http, mainService) {
 			what: $scope.me.what,
 			email: mainService.me.email,
 			cell: $scope.me.cell,
-			lat: mainService.location.lat,
-			lon: mainService.location.lng,
+			lat: mainService.me.lat,
+			lon: mainService.me.lng,
 			timeStamp: Date.now(),
 			pictureMd : $scope.me.pictureMd
 		};
