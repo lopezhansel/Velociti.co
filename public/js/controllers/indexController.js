@@ -3,7 +3,7 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 
 
 		$scope.mainService = mainService;
-
+		console.log($scope.mainService);
 		$scope.showLoginDialog = function(ev, index) {
 		  $scope.popUpDialogUser = index;
 		  $mdDialog.show({

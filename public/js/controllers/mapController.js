@@ -32,8 +32,6 @@ app.controller('mapController', ['$scope', 'mainService', '$routeParams', '$mdMe
 				if (mainService.location) {
 					$scope.mapCenter = mainService.location;
 					$scope.$digest();
-
-
 				}
 			}, 5000);
 		}

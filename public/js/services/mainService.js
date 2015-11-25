@@ -1,7 +1,7 @@
 "use strict"
 
 app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", function($routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location) {
-
+	console.log("how many times does mainService run");
 	// Alias for the module
 	var serv = this;
 
@@ -27,12 +27,10 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 
 	serv.userLocToMarkers = function(inputUsers) {
 		var markersArray = [];
-
 		if (inputUsers.constructor === Object) {
 			for (var oneUser in inputUsers) {
 				// console.log(inputUsers[oneUser]);
-
-				place = {
+				var place = {
 					lat: inputUsers[oneUser].lat,
 					lng: inputUsers[oneUser].lon,
 					message: serv.getMessage(inputUsers[oneUser]),
@@ -43,26 +41,27 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 				}; //for (var oneUser in usersGeoDat
 				markersArray.push(place);
 			}
-		} // if (inputUsers.constructor === Object
-
+		}
 		if (inputUsers.constructor === Array) {
-			for (var i = 0; i < inputUsers.length; i++) {
-				var place = {
-					lat: inputUsers[i].lat,
-					lng: inputUsers[i].lon,
-					message: serv.getMessage(inputUsers[i]),
+			markersArray = inputUsers.map(function(el) {
+				var place2 = {
+					lat: inputUsers[oneUser].lat,
+					lng: inputUsers[oneUser].lon,
+					message: serv.getMessage(inputUsers[oneUser]),
 					icon: {
-						iconUrl: 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
+						iconUrl: inputUsers[oneUser].icon || 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
 						iconSize: [45, 45],
 					}
 				};
-				markersArray.push(place);
-			}
-		} // if (inputUsers.constructor === Array)
+				return place2;
+			});
+			console.log(markersArray);
+		}
+
 		return markersArray;
 	};
 
-	serv.getMessage = function (user) {
+	serv.getMessage = function(user) {
 		// var h1 = "<p ng-click='toggleMap()" +"'>hello</p>"
 		var url = "http://en.wikipedia.org/wiki/" + user.place;
 		// $scope.openToast(user.pageid)
@@ -74,6 +73,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 	};
 
 	// Calculate distance between two coordinates and returns result in miles
+
 	serv.greatCircleMethod = function(destLat, destLng, clientLat, clientLng) {
 		// Catch Errors , if zero will throw error but function will still run
 		console.assert(destLat || destLng || clientLat || clientLng, "greatCircleMethod: Missing Parameters");
@@ -91,11 +91,13 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 	};
 
 	serv.updateDistFromUsers = function() {
-		for (var prop2 in serv.users) {
-			// shorter alias
-			var user = serv.users[prop2];
-			console.assert(serv.me.lat && serv.me.lng, "serv.me.lat  serv.me.lng are " + serv.me.lng);
-			user.apart = serv.greatCircleMethod(user.lat, user.lon, serv.me.lat, serv.me.lng);
+		if (serv.me.lat !== 0) {
+			for (var prop2 in serv.users) {
+				// shorter alias
+				var user = serv.users[prop2];
+				console.assert(serv.me.lat && serv.me.lng, "serv.me.lat  serv.me.lng are " + serv.me.lng);
+				user.apart = serv.greatCircleMethod(user.lat, user.lon, serv.me.lat, serv.me.lng);
+			}
 		}
 	};
 
