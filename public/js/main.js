@@ -1,5 +1,3 @@
-
-
 function userLocToMarkers(inputUsers) {
     var markersArray = [];
     if (inputUsers.constructor === Object) {

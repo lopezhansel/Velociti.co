@@ -1,26 +1,25 @@
 app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", "$timeout",
 	function($scope, $mdSidenav, mainService, $routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location, $timeout) {
 
-
 		$scope.mainService = mainService;
 		console.log($scope.mainService);
 		$scope.showLoginDialog = function(ev, index) {
-		  $scope.popUpDialogUser = index;
-		  $mdDialog.show({
-		      locals: {
-		        currentUserPopUP: $scope.popUpDialogUser
-		      },
-		      controller: loginDialogController,
-		      templateUrl: '/views/loginDialog.html',
-		      parent: angular.element(document.body),
-		      targetEvent: ev,
-		      clickOutsideToClose: true
-		    })
-		    .then(function(answer) {
-		      $scope.status = 'You said the information was "' + answer + '".';
-		    }, function() {
-		      $scope.status = 'You cancelled the dialog.';
-		    });
+			$scope.popUpDialogUser = index;
+			$mdDialog.show({
+					locals: {
+						currentUserPopUP: $scope.popUpDialogUser
+					},
+					controller: loginDialogController,
+					templateUrl: '/views/loginDialog.html',
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose: true
+				})
+				.then(function(answer) {
+					$scope.status = 'You said the information was "' + answer + '".';
+				}, function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
 
 		};
 
@@ -29,11 +28,21 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 		};
 
 		$scope.ngViewToggle = function(urlStr) {
-			if ($location.$$path === '/map')       {$scope.selectedIndex = 1; }
-			if ($location.$$path === '/profile')   {$scope.selectedIndex = 2; }
-			if ($location.$$path === '/login')     {$scope.selectedIndex = 3; }
-			if ($location.$$path === '/home')      {$scope.selectedIndex = 0; }
-			if ($location.$$path === '/requests')  {$scope.selectedIndex = 4; }
+			if ($location.$$path === '/map') {
+				$scope.selectedIndex = 1;
+			}
+			if ($location.$$path === '/profile') {
+				$scope.selectedIndex = 2;
+			}
+			if ($location.$$path === '/login') {
+				$scope.selectedIndex = 3;
+			}
+			if ($location.$$path === '/home') {
+				$scope.selectedIndex = 0;
+			}
+			if ($location.$$path === '/requests') {
+				$scope.selectedIndex = 4;
+			}
 			return $location.$$path === urlStr;
 		};
 		$scope.me = mainService.me;
@@ -50,9 +59,9 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 				$scope.selectedIndex = 0;
 			}
 		};
-		$scope.goToProfile = function  (user) {
-		    mainService.selectUserProfile = user;
-	
+		$scope.goToProfile = function(user) {
+			mainService.selectUserProfile = user;
+
 			$location.path("/profile");
 		};
 		$scope.toggleSidenav = function(menuId) {
@@ -82,30 +91,30 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 
 		};
 		$scope.loginAsGuest = function() {
-		  $scope.guest = {
-		    username : "smallmouse892",
-		    password : "tunafish"
-		  };
-		  $http({
-		    method: 'POST',
-		    url: '/login',
-		    data: $scope.guest
-		  }).then(function(returnData) {
-		    console.log(returnData);
-		    if (returnData.data) {
-		      window.location.href = "/";
-		    } else {
-		      console.log(returnData);
-		    }
-		  } );
-		  $mdDialog.hide();
+			$scope.guest = {
+				username: "smallmouse892",
+				password: "tunafish"
+			};
+			$http({
+				method: 'POST',
+				url: '/login',
+				data: $scope.guest
+			}).then(function(returnData) {
+				console.log(returnData);
+				if (returnData.data) {
+					window.location.href = "/";
+				} else {
+					console.log(returnData);
+				}
+			});
+			$mdDialog.hide();
 		};
 
 
 		$scope.$watch(function() {
-		  return $mdMedia('sm');
+			return $mdMedia('sm');
 		}, function(sizeBool) {
-		  $scope.sm = sizeBool;
+			$scope.sm = sizeBool;
 		});
 	}
 ]);
@@ -125,7 +134,7 @@ function requestController($scope, $mdDialog, $http, mainService) {
 	$scope.emitNewRequest = function() {
 		// console.log($scope.me.pictureMd);
 		var emitObject = {
-			firstName : mainService.me.firstName.capitalizeFirstLetter(),
+			firstName: mainService.me.firstName.capitalizeFirstLetter(),
 			lastName: mainService.me.lastName.capitalizeFirstLetter(),
 			what: $scope.me.what,
 			email: mainService.me.email,
@@ -133,7 +142,7 @@ function requestController($scope, $mdDialog, $http, mainService) {
 			lat: mainService.me.lat,
 			lon: mainService.me.lng,
 			timeStamp: Date.now(),
-			pictureMd : $scope.me.pictureMd
+			pictureMd: $scope.me.pictureMd
 		};
 		socket.emit("newRequest", emitObject);
 		$mdDialog.hide();
