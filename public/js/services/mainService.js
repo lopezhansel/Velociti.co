@@ -27,7 +27,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 
 	serv.userLocToMarkers = function(inputUsers) {
 		var markersArray = [];
-		
+
 		if (inputUsers.constructor === Object) {
 			for (var oneUser in inputUsers) {
 				// console.log(inputUsers[oneUser]);
@@ -35,7 +35,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 				place = {
 					lat: inputUsers[oneUser].lat,
 					lng: inputUsers[oneUser].lon,
-					message: getMessage(inputUsers[oneUser]),
+					message: serv.getMessage(inputUsers[oneUser]),
 					icon: {
 						iconUrl: inputUsers[oneUser].icon || 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
 						iconSize: [45, 45],
@@ -47,10 +47,10 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 
 		if (inputUsers.constructor === Array) {
 			for (var i = 0; i < inputUsers.length; i++) {
-				place = {
+				var place = {
 					lat: inputUsers[i].lat,
 					lng: inputUsers[i].lon,
-					message: getMessage(inputUsers[i]),
+					message: serv.getMessage(inputUsers[i]),
 					icon: {
 						iconUrl: 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
 						iconSize: [45, 45],
@@ -60,6 +60,17 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 			}
 		} // if (inputUsers.constructor === Array)
 		return markersArray;
+	};
+
+	serv.getMessage = function (user) {
+		// var h1 = "<p ng-click='toggleMap()" +"'>hello</p>"
+		var url = "http://en.wikipedia.org/wiki/" + user.place;
+		// $scope.openToast(user.pageid)
+		var ptag = "<p><a target='_blank'  href='" + url + "'>" + user.timeStamp + "</a></p>";
+
+		var profileUrl = "#ProfileView/" + user._id;
+		// return "<h5><a target='_blank'  href='" + profileUrl + "'>" + user.firstName.toUpperCase() + "</a></h5>" + ptag + "<img src=" + user.pictureSm + ">";
+		return "<h6><a target='_blank'  href='" + profileUrl + "'>" + user.username + "</a></h6>" + ptag + "<img src=" + user.pictureMd + ">";
 	};
 
 	// Calculate distance between two coordinates and returns result in miles
