@@ -25,6 +25,43 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 		$mdToast.show($mdToast.simple().content(toastMessage).position(messagePosition));
 	};
 
+	serv.userLocToMarkers = function(inputUsers) {
+		var markersArray = [];
+		
+		if (inputUsers.constructor === Object) {
+			for (var oneUser in inputUsers) {
+				// console.log(inputUsers[oneUser]);
+
+				place = {
+					lat: inputUsers[oneUser].lat,
+					lng: inputUsers[oneUser].lon,
+					message: getMessage(inputUsers[oneUser]),
+					icon: {
+						iconUrl: inputUsers[oneUser].icon || 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
+						iconSize: [45, 45],
+					}
+				}; //for (var oneUser in usersGeoDat
+				markersArray.push(place);
+			}
+		} // if (inputUsers.constructor === Object
+
+		if (inputUsers.constructor === Array) {
+			for (var i = 0; i < inputUsers.length; i++) {
+				place = {
+					lat: inputUsers[i].lat,
+					lng: inputUsers[i].lon,
+					message: getMessage(inputUsers[i]),
+					icon: {
+						iconUrl: 'https://cdn4.iconfinder.com/data/icons/transportation-2-front-view/80/Transportation_front_view-06-512.png',
+						iconSize: [45, 45],
+					}
+				};
+				markersArray.push(place);
+			}
+		} // if (inputUsers.constructor === Array)
+		return markersArray;
+	};
+
 	// Calculate distance between two coordinates and returns result in miles
 	serv.greatCircleMethod = function(destLat, destLng, clientLat, clientLng) {
 		// Catch Errors , if zero will throw error but function will still run
@@ -107,7 +144,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 			serv.openToast("Full Location Updated", "bottom right");
 			serv.updateMeLocation(gps.coords);
 			serv.updateDistFromUsers();
-			serv.setMapCenter(gps.coords.latitude,gps.coords.longitude,10);
+			serv.setMapCenter(gps.coords.latitude, gps.coords.longitude, 10);
 			var myLocation = {
 				accuracy: gps.coords.accuracy,
 				lat: gps.coords.latitude,
