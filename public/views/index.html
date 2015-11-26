@@ -56,7 +56,7 @@
                     <img class="profileImg" ng-src="{{::me.pictureMd}}">
                 <h1 >Hey {{me.firstName.capitalizeFirstLetter()}}</h1>
                 </md-content>
-                <md-input-container > 
+                <md-input-container ng-click="mainService.openToast()"> 
                     <label>Search</label> 
                     <md-icon ><i class="material-icons ">search</i></md-icon>
                     <input ng-model="searchText" type="text"/> 
@@ -64,6 +64,7 @@
             </md-sidenav>
 
             <div flex layout="column" layout-fill>
+                <h1>{{me}}</h1>
                 <md-tabs md-stretch-tabs md-selected="selectedIndex" class="md-accent">
                      <md-tab label="Home" ng-click="redirect('/home')" > 
                         <ng-view id="content" flex="100" layout="column"  ng-if="ngViewToggle('/home')" md-swipe-left="switchTabs(1)" md-swipe-right="switchTabs(-1)"> </ng-view>
@@ -83,7 +84,7 @@
                   </md-tabs>
             </div>
         </div>
-        
+                
         <!-- <div  flex layout="column" >
             <md-tabs  md-stretch-tabs md-selected="selectedIndex" class="md-accent">
                 <md-tab label="Home" ng-click="redirect('/home')" ></md-tab>

@@ -1,3 +1,4 @@
+"user strict";
 app.controller('mainController', ['$scope', 'mainService', '$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", "$timeout", function($scope, mainService, $routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location, $timeout) {
     $timeout(function() {
         if (mainService.me === "there") {

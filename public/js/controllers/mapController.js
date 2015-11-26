@@ -5,7 +5,7 @@ app.controller('mapController', ['$scope', 'mainService', '$routeParams', '$mdMe
 
 		if (mainService.users) {
 			$timeout(function() {
-				$scope.mapMarkerss = userLocToMarkers(mainService.users);
+				$scope.mapMarkerss = mainService.userLocToMarkers(mainService.users);
 			}, 500);
 		}
 	}

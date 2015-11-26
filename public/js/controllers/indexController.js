@@ -2,7 +2,8 @@ app.controller('indexController', ['$scope', '$mdSidenav', 'mainService', '$rout
 	function($scope, $mdSidenav, mainService, $routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location, $timeout) {
 
 		$scope.mainService = mainService;
-		console.log($scope.mainService);
+		
+		
 		$scope.showLoginDialog = function(ev, index) {
 			$scope.popUpDialogUser = index;
 			$mdDialog.show({

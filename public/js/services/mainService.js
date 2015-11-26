@@ -1,7 +1,6 @@
 "use strict"
 
 app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast', "$http", "$interval", 'leafletData', "$location", function($routeParams, $mdMedia, $mdDialog, $mdToast, $http, $interval, leafletData, $location) {
-	console.log("how many times does mainService run");
 	// Alias for the module
 	var serv = this;
 
@@ -9,7 +8,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 	serv.me = {
 		firstName: null,
 		lastName: null,
-		id: null,
+		id: null,	
 		lat: 0,
 		accuracy: null,
 		lng: 0,
@@ -176,6 +175,7 @@ app.service('mainService', ['$routeParams', '$mdMedia', '$mdDialog', '$mdToast',
 
 	// Update me once logged in
 	serv.socket.on('apiMe', function(apiMe) {
+		console.log(apiMe);
 		if (apiMe.lng) {
 			apiMe.lng = apiMe.lon;
 		}
