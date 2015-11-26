@@ -14,7 +14,7 @@ module.exports = app;
 require("./config/myPassport");
 
 
-let port = 3000;
+let port = 5000;
 app.server = app.listen(port, () => {
     // interpolating variable into string
     console.log(`-=-=-=-=-= VELOCITI -=-=-=-=-= 
@@ -26,8 +26,8 @@ let socketServer = io(app.server);
 
 let loggedInUsers = {};
 
-User.find({}).limit(10).exec((err, docs) => {
-    docs.forEach((el) => loggedInUsers[el._id] = el);
+User.find({}).limit(10).exec((err, users) => {
+    users.forEach( el => loggedInUsers[el._id] = el);
 });
 
 let allRequests = {};
@@ -37,7 +37,7 @@ socketServer.use((socket, next) => {
 });
 
 
-socketServer.on("connection", (socket) => {
+socketServer.on("connection", socket => {
     console.log("NEW SOCKET CONNECTION Adress: ", socket.handshake.address);
     let apiMe = "there";
     socket.emit('apiMe', apiMe);
@@ -61,6 +61,7 @@ socketServer.on("connection", (socket) => {
             newRequest.lon = incoming.lon;
             newRequest.timeStamp = incoming.timeStamp;
             newRequest.pictureMd = incoming.pictureMd;
+
             allRequests[incoming.timeStamp] = newRequest;
             socketServer.emit('allRequests', allRequests);
         });
@@ -80,7 +81,8 @@ socketServer.on("connection", (socket) => {
         });
 
 
-        socket.on("myLocation",(userLocation)=> {
+        socket.on("myLocation", userLocation => {
+            console.log("hey hey hey " ,userLocation);
             if (apiMe) {
                 loggedInUsers[apiMe].lat = userLocation.lat;
                 loggedInUsers[apiMe].lon = userLocation.lon;
@@ -88,7 +90,7 @@ socketServer.on("connection", (socket) => {
             }
             socketServer.emit('allUsers', loggedInUsers);
         });
-        socket.on('disconnect',() =>{
+        socket.on('disconnect', () =>{
             console.log('user disconnected');
             delete loggedInUsers[apiMe];
             socketServer.emit('allUsers', loggedInUsers);

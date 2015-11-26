@@ -30,9 +30,9 @@
     </head>
 
     <body ng-controller="indexController" ng-cloak>
-
+        
         <md-toolbar layout="column"  class="md-whiteframe-z2" >
-          <div class="md-toolbar-tools" md-ink-ripple >
+          <div class="md-toolbar-tools"  md-ink-ripple >
             <md-button ng-click="toggleSidenav('left')" hide-gt-lg class="md-icon-button">
               <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
             </md-button>
@@ -56,7 +56,7 @@
                     <img class="profileImg" ng-src="{{::me.pictureMd}}">
                 <h1 >Hey {{me.firstName.capitalizeFirstLetter()}}</h1>
                 </md-content>
-                <md-input-container ng-click="mainService.openToast()"> 
+                <md-input-container> 
                     <label>Search</label> 
                     <md-icon ><i class="material-icons ">search</i></md-icon>
                     <input ng-model="searchText" type="text"/> 
@@ -64,7 +64,7 @@
             </md-sidenav>
 
             <div flex layout="column" layout-fill>
-                <h1>{{me}}</h1>
+
                 <md-tabs md-stretch-tabs md-selected="selectedIndex" class="md-accent">
                      <md-tab label="Home" ng-click="redirect('/home')" > 
                         <ng-view id="content" flex="100" layout="column"  ng-if="ngViewToggle('/home')" md-swipe-left="switchTabs(1)" md-swipe-right="switchTabs(-1)"> </ng-view>
