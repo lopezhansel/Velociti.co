@@ -10,7 +10,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-leaflet-directive/0.8.7/angular-leaflet-directive.min.js"></script>
         <script type="text/javascript", src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-        <script src="./js/vendors/hanselLib.js"></script>
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
  
 
@@ -64,7 +65,6 @@
             </md-sidenav>
 
             <div flex layout="column" layout-fill>
-
                 <md-tabs md-stretch-tabs md-selected="selectedIndex" class="md-accent">
                      <md-tab label="Home" ng-click="redirect('/home')" > 
                         <ng-view id="content" flex="100" layout="column"  ng-if="ngViewToggle('/home')" md-swipe-left="switchTabs(1)" md-swipe-right="switchTabs(-1)"> </ng-view>
@@ -100,12 +100,14 @@
             <md-icon ><i class="material-icons ">add</i></md-icon>
         </md-button>
 
-        <script src="./js/main.js"></script>
-        <script src="./js/services/mainService.js"></script>
-        <script src="./js/controllers/mainController.js"></script>
-        <script src="./js/controllers/requestsController.js"></script>
-        <script src="./js/controllers/profileController.js"></script>
-        <script src="./js/controllers/indexController.js"></script>
-        <script src="./js/controllers/mapController.js"></script>
+    
+    <script src="./build/js/vendors/hanselLib.js"></script>
+    <script src="./build/js/main.js"></script>
+    <script src="./build/js/services/mainService.js"></script>
+    <script src="./build/js/controllers/mainController.js"></script>
+    <script src="./build/js/controllers/requestsController.js"></script>
+    <script src="./build/js/controllers/profileController.js"></script>
+    <script src="./build/js/controllers/indexController.js"></script>
+    <script src="./build/js/controllers/mapController.js"></script>
     </body>
 </html>
